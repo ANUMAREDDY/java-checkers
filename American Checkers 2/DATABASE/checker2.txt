@@ -1,0 +1,37 @@
+drop database checker2;
+create database checker2;
+use checker2;
+create table player(
+  playerId int auto_increment primary key,
+  name varchar(255) not null,
+  email varchar(255) not null unique,
+  phone varchar(255) not null unique,
+  password varchar(255)
+);
+
+create table currentPlayer(
+   currentPlayerId int auto_increment primary key,
+   playerId int not null,
+   FOREIGN KEY (playerId) REFERENCES player(playerId)
+);
+
+create table checkerGame(
+   checkerGameId int auto_increment primary key,
+   playerId int not null,
+   startTime varchar(255),
+   currentStatus varchar(255),
+   playType varchar(255),
+   FOREIGN KEY (playerId) REFERENCES player(playerId)
+);
+create table move(
+   moveId int auto_increment primary key,
+   checkerGameId int,
+   player varchar(255),
+   moveA int,
+   moveB int,
+   MoveX int,
+   MoveY int,
+   movetime varchar(255),
+   FOREIGN KEY (checkerGameId) REFERENCES checkerGame(checkerGameId)
+);
+
